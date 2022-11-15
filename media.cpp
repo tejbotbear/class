@@ -1,19 +1,22 @@
+#include <cstring>
 #include <iostream>
-#include "Media.h"
+#include "media.h"
+#include "movies.h"
+#include "music.h"
+#include "videogames.h"
+
 using namespace std;
 
 Media::Media() {
-  char title[4];
+  cout << id << endl;
 }
 
-void Media::getTitle() {
-
-  title[] = {'T','E','S','T'};
-  cout << title << endl;
+char* Media::getTitle() {
+  cout << "title" << endl;
+  return 0;
 }
 
-void Media::getYear() {
-
+int Media::getYear() {
   cout << "test year" << endl;
-  
+  return 0;
 }

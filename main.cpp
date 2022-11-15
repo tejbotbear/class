@@ -10,5 +10,10 @@
 using namespace std;
 
 int main() {
+
+  Media* MediaType[3];
+  
+
+  
   Media();
 }
