@@ -8,7 +8,7 @@
 using namespace std;
 
 Media::Media() {
-  cout << id << endl;
+  cout << "hi" << endl;
 }
 
 char* Media::getTitle() {
