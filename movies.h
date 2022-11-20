@@ -17,5 +17,4 @@ class Movies : public Media {
     cout << "Rating: " << rating << endl;
     cout << "Director: " << director << endl;
   }
-
 };

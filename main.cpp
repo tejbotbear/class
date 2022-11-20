@@ -20,9 +20,8 @@ int main() {
   vector <Music> MusicVect;
   vector <Movies> MovieVect;
   vector <VideoGame> VideoGameVect;
- 
-  ACTION(VideoGameVect, MusicVect, MovieVect);
   
+  ACTION(VideoGameVect, MusicVect, MovieVect);
 }
 
 void ADD(vector <VideoGame> &VideoGameVect, vector <Music> &MusicVect, vector <Movies> &MovieVect) {
@@ -94,7 +93,7 @@ void ACTION(vector <VideoGame> &VideoGameVect, vector <Music> &MusicVect, vector
 
   do {
     for(int i = 0; i < 10; i++) Input[i] = '\0';
-     
+    cin.ignore();
     cout << "You are now in the action menu. Type 'ADD' to add new media, or type 'SEARCH' to search through currently stored media. Additionally, entering 'DELETE' allows you to delete a media entry of your choice. 'QUIT' will end the program." << endl;
     cin.getline(Input, 10);
 
@@ -156,10 +155,15 @@ void ACTION(vector <VideoGame> &VideoGameVect, vector <Music> &MusicVect, vector
           Movies Mov = MovieVect[i];
           if (!strcmp(Mov.title, titleinput)) {
              Mov.PrintOutput();
-            }
           }
+	}
       }
     }
   } while (strcmp(Input, quit));
 }
 
+void Delete(vector <VideoGame*> VideoGameVect, vector <Music*> MusicVect, vector <Movies*> MovieVect) {
+
+
+
+}
