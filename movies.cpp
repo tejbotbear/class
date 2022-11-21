@@ -1,6 +1,6 @@
 :#include <iostream>
 #include <cstring>
-#include "movie.h"
+#include "movies.h"
 
 Movie::PrintOutput() {
  cout << "----------------------------------------------" << endl;
