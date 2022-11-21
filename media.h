@@ -5,8 +5,6 @@ using namespace std;
 
 class Media {
  public:
-  char getTitle();
-  int getYear();
   char* title;
   int year;
 
