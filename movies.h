@@ -7,7 +7,7 @@ class Movies : public Media {
  public:
   int duration;
   int rating;
-  char director[100];
+  char* director;
 
   void PrintOutput() {
     cout << "----------------------------------------------" << endl;
@@ -16,5 +16,13 @@ class Movies : public Media {
     cout << "Duration: " << duration << endl;
     cout << "Rating: " << rating << endl;
     cout << "Director: " << director << endl;
+  }
+
+  Movies() {
+    director = new char[100];
+  }
+
+  ~Movies() {
+    delete director;
   }
 };

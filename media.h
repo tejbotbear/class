@@ -7,7 +7,14 @@ class Media {
  public:
   char getTitle();
   int getYear();
-  char title[100];
+  char* title;
   int year;
 
+  Media() {
+    title = new char[100];
+  }
+
+  ~Media() {
+    delete title;
+  }
 };

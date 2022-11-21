@@ -6,7 +6,7 @@ using namespace std;
 class VideoGame : public Media {
  public:
   int rating;
-  char publisher[100];
+  char* publisher;
 
   void PrintOutput() {
     cout << "----------------------------------------------" << endl;
@@ -15,5 +15,13 @@ class VideoGame : public Media {
     cout << "Rating: " << rating << endl;
     cout << "Publisher: " << publisher << endl;
     return;
+  }
+
+  VideoGame() {
+    publisher = new char[100];
+  }
+
+  ~VideoGame() {
+    delete publisher;
   }
 };

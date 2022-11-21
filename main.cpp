@@ -12,6 +12,7 @@
 #include "movies.h"
 using namespace std;
 
+void Delete(vector <VideoGame> &VideoGameVect, vector <Music> &MusicVect, vector <Movies> &MovieVect);
 void ADD(vector <VideoGame> &VideoGameVect, vector <Music> &MusicVect, vector <Movies> &MovieVect);
 void ACTION(vector <VideoGame> &VideoGameVect, vector <Music> &MusicVect, vector <Movies> &MovieVect);
 
@@ -81,7 +82,8 @@ void ADD(vector <VideoGame> &VideoGameVect, vector <Music> &MusicVect, vector <M
 }
 
 void ACTION(vector <VideoGame> &VideoGameVect, vector <Music> &MusicVect, vector <Movies> &MovieVect) {
-  char Input[10] = {'\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0'};
+  //  char Input[10] = {'\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0'};
+  char Input[10] = {0};
   char search[] = "SEARCH";
   char add[] = "ADD";
   char del[] = "DELETE";
@@ -90,7 +92,15 @@ void ACTION(vector <VideoGame> &VideoGameVect, vector <Music> &MusicVect, vector
   char year[] = "YEAR";
   int yearinput;
   char titleinput[100];
-
+  bool ignore = false;
+  int l;
+  int k = 1;
+  do {
+    for (int l = k; l < k; l++) {
+      cout << "Press enter to begin" << endl;
+      ignore = true; 
+    }
+  } while (ignore == true);
   do {
     for(int i = 0; i < 10; i++) Input[i] = '\0';
     cin.ignore();
@@ -99,6 +109,9 @@ void ACTION(vector <VideoGame> &VideoGameVect, vector <Music> &MusicVect, vector
 
     if (!strcmp(Input, add)) {
       ADD(VideoGameVect, MusicVect, MovieVect);
+    }
+    else if (!strcmp(Input, del)) {
+      Delete(VideoGameVect, MusicVect, MovieVect);
     }
     else if (!strcmp(Input, search)) {
       for(int i = 0; i < 10; i++) Input[i] = '\0';
@@ -162,8 +175,141 @@ void ACTION(vector <VideoGame> &VideoGameVect, vector <Music> &MusicVect, vector
   } while (strcmp(Input, quit));
 }
 
-void Delete(vector <VideoGame*> VideoGameVect, vector <Music*> MusicVect, vector <Movies*> MovieVect) {
+void Delete(vector <VideoGame> &VideoGameVect, vector <Music> &MusicVect, vector <Movies> &MovieVect) {
+  char Input[10] = {'\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0'};
+  char videogame[] = "VIDEOGAME";
+  char music[] = "MUSIC";
+  char movie[] = "MOVIE";
+  //char quit[] = "QUIT";
+  char yes[] = "YES";
+  char no[] = "NO";
+  int yearinput;
+  char year[] = "YEAR";
+  char title[] = "TITLE";
+  char titleinput[100];
+  
+  for(int i = 0; i < 10; i++) Input[i] = '\0';
 
+  cout << "Enter 'YEAR' to search by publish year, or input 'TITLE' to search by title" << endl;
+  cin.getline(Input, 10);
+  if (!strcmp(Input, year)) {
+    for(int i = 0; i < 10; i++) Input[i] = '\0';
+    cout << "What year do you want to search for?" << endl;
+    cin >> yearinput;
+    int j = VideoGameVect.size();
+    for (int i = 0; i < j; i++) {
+      VideoGame Game = VideoGameVect[i];
+      cout << "Results for your search" << endl;
+      if (Game.year == yearinput) {
+        Game.PrintOutput();
+      }
+    }
+    j = MusicVect.size();
+    for (int i = 0; i < j; i++) {
+      Music Mus = MusicVect[i];
+      if ( Mus.year == yearinput) {
+	Mus.PrintOutput();
+      }
+    }
+    j = MovieVect.size();
+    for (int i = 0; i < j; i++) {
+      Movies Mov = MovieVect[i];
+      if (Mov.year == yearinput) {
+        Mov.PrintOutput();
+      }
+    }
+    for(int i = 0; i < 10; i++) Input[i] = '\0';
+    cout << "Would you like to delete these objects? ('YES', 'NO')" << endl;
+    cin.getline(Input, 10);
 
+    if (!strcmp(Input, yes)) {
+      j = VideoGameVect.size();
+      for (int i = 0; i < j; i++) {
+	VideoGame Game = VideoGameVect[i];
+	if (Game.year == yearinput) {
+	  VideoGameVect.erase(VideoGameVect.begin()+i);
+	  delete &Game;
+	}
+      }
+      j = MusicVect.size();
+      for (int i = 0; i < j; i++) {
+	Music Mus = MusicVect[i];
+	if (Mus.year == yearinput) {
+	  MusicVect.erase(MusicVect.begin()+i);
+	  delete &Mus;
+	}
+      }
+      j = MovieVect.size();
+      for (int i = 0; i < j; i++) {
+	Movies Mov = MovieVect[i];
+	if (Mov.year == yearinput) {
+	  MovieVect.erase(MovieVect.begin()+i);
+	  delete &Mov;
+	}
+      }
+    }
+    else if (!strcmp(Input, no)) {
+        ACTION(VideoGameVect, MusicVect, MovieVect);
+    }
+  }
+  else if (!strcmp(Input, title)) {
+    for(int i = 0; i < 10; i++) Input[i] = '\0';
+    cout << "What title do you want to search for?" << endl;
+    cin >> titleinput;
+    int j = VideoGameVect.size();
+    for (int i = 0; i < j; i++) {
+      VideoGame Game = VideoGameVect[i];
+      cout << "Results for your search" << endl;
+      if (!strcmp(Game.title, titleinput)) {
+        Game.PrintOutput();
+      }
+    }
+    j = MusicVect.size();
+    for (int i = 0; i < j; i++) {
+      Music Mus = MusicVect[i];
+      if (!strcmp(Mus.title, titleinput)) {
+        Mus.PrintOutput();
+      }
+    }
+    j = MovieVect.size();
+    for (int i = 0; i < j; i++) {
+      Movies Mov = MovieVect[i];
+      if (!strcmp(Mov.title, titleinput)) {
+         Mov.PrintOutput();
+      }
+    }
+    for(int i = 0; i < 10; i++) Input[i] = '\0';
+    cout << "Would you like to delete these objects? ('YES', 'NO')" << endl;
+    cin.getline(Input, 10);
 
+    if (!strcmp(Input, yes)) {
+      j = VideoGameVect.size();
+      for (int i = 0; i < j; i++) {
+	VideoGame Game = VideoGameVect[i];
+	if(!strcmp(Game.title, titleinput)) {
+	  VideoGameVect.erase(VideoGameVect.begin()+i);
+	  delete &Game;
+	}
+      }
+      j = MusicVect.size();
+      for (int i = 0; i < j; i++) {
+	Music Mus = MusicVect[i];
+	if(!strcmp(Mus.title, titleinput)) {
+	  MusicVect.erase(MusicVect.begin()+i);
+	  delete &Mus;
+	}
+      }
+      j = MovieVect.size();
+      for (int i = 0; i < j; i++) {
+	Movies Mov = MovieVect[i];
+	if(!strcmp(Mov.title, titleinput)) {
+	  MovieVect.erase(MovieVect.begin()+i);
+	  delete &Mov;
+	}
+      }
+    }
+    else if (!strcmp(Input, no)) {
+        ACTION(VideoGameVect, MusicVect, MovieVect);
+    }
+  }  
 }

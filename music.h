@@ -6,8 +6,8 @@ using namespace std;
 class Music : public Media {
  public:
   int duration;
-  char publisher[100];
-  char artist[100];
+  char* publisher;
+  char* artist;
 
   void PrintOutput() {
     cout << "----------------------------------------------" << endl;
@@ -16,5 +16,15 @@ class Music : public Media {
     cout << "Duration: " << duration << endl;
     cout << "Publisher: " << publisher << endl;
     cout << "Artist: " << artist << endl;
+  }
+
+  Music() {
+    publisher = new char[100];
+    artist = new char[100];
+  }
+
+  ~Music() {
+    delete publisher;
+    delete artist;
   }
 };
