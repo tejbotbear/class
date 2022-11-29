@@ -207,6 +207,7 @@ void Delete(vector <VideoGame*> &VideoGameVect, vector <Music*> &MusicVect, vect
     for(int i = 0; i < 10; i++) Input[i] = '\0';
     cout << "What year do you want to search for?" << endl;
     cin >> yearinput;
+    cin.ignore();
     int j = VideoGameVect.size();
     for (int i = 0; i < j; i++) {
       VideoGame* Game = VideoGameVect[i];
@@ -263,12 +264,12 @@ void Delete(vector <VideoGame*> &VideoGameVect, vector <Music*> &MusicVect, vect
         ACTION(VideoGameVect, MusicVect, MovieVect);
     }
   }
-
   // Search and delete by title
   else if (!strcmp(Input, title)) {
     for(int i = 0; i < 10; i++) Input[i] = '\0';
+    for(int i = 0; i < 100; i++) titleinput[i] = '\0';
     cout << "What title do you want to search for?" << endl;
-    cin >> titleinput;
+    cin.getline(titleinput, 100);
     int j = VideoGameVect.size();
     for (int i = 0; i < j; i++) {
       VideoGame* Game = VideoGameVect[i];
@@ -294,7 +295,6 @@ void Delete(vector <VideoGame*> &VideoGameVect, vector <Music*> &MusicVect, vect
     for(int i = 0; i < 10; i++) Input[i] = '\0';
     cout << "Would you like to delete these objects? ('YES', 'NO')" << endl;
     cin.getline(Input, 10);
-
     if (!strcmp(Input, yes)) {
       j = VideoGameVect.size();
       for (int i = 0; i < j; i++) {

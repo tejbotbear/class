@@ -24,7 +24,7 @@ class Music : public Media {
   }
 
   ~Music() {
-    delete publisher;
     delete artist;
+    delete publisher;
   }
 };

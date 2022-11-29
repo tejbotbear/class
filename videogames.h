@@ -7,6 +7,7 @@ class VideoGame : public Media {
  public:
   int rating;
   char* publisher;
+  
 
   void PrintOutput() {
     cout << "----------------------------------------------" << endl;
